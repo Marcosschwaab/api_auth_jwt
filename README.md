@@ -1,160 +1,164 @@
-Authentication API
-Uma API simples para autenticação de usuários, utilizando Node.js, Express e MongoDB. Permite registro, login e acesso a rotas privadas com autenticação via JWT.
+# API de Autenticação com Node.js, Express, MongoDB e JWT
 
-Funcionalidades
-Registro de Usuário: Crie uma conta com nome, e-mail e senha.
+Este projeto é uma API de autenticação simples utilizando Node.js, Express, MongoDB, JWT (JSON Web Tokens) e bcrypt para gerenciamento de senhas.
 
-Login: Autentique-se com e-mail e senha para receber um token JWT.
+## Funcionalidades
 
-Rota Privada: Acesse dados do usuário autenticado usando o token JWT.
+- **Registro de usuário**: Permite criar uma conta de usuário com validações de campos.
+- **Login de usuário**: Valida as credenciais e gera um token JWT para autenticação.
+- **Rotas públicas e privadas**: Uma rota pública de boas-vindas e uma rota privada para obter os dados do usuário autenticado.
 
-Tecnologias
-Express.js
+## Tecnologias Utilizadas
 
-Mongoose (ORM para MongoDB)
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT (JSON Web Token)
+- bcrypt
 
-Bcrypt (Criptografia de senhas)
+## Requisitos
 
-JSON Web Token (JWT) (Autenticação stateless)
+- Node.js v14 ou superior
+- MongoDB (local ou Atlas)
+- Um arquivo `.env` com variáveis de ambiente configuradas.
 
-Dotenv (Gerenciamento de variáveis de ambiente)
+## Instalação
 
-Pré-requisitos
-Node.js (v18+)
-
-MongoDB (local ou Atlas)
-
-NPM ou Yarn
-
-Instalação
-Clone o repositório:
-
-bash
-Copy
-git clone https://github.com/seu-usuario/authentication-api.git
-cd authentication-api
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   cd nome-do-repositorio
 Instale as dependências:
 
 bash
-Copy
+Copiar
 npm install
-# ou
-yarn install
-Crie um arquivo .env na raiz do projeto e configure as variáveis:
+Crie um arquivo .env na raiz do projeto com as seguintes variáveis de ambiente:
 
-env
-Copy
-MONGO_URL=sua_url_mongodb
-JWT_SECRET=seu_secret_jwt
+php-template
+Copiar
+MONGO_URL=mongodb://<usuario>:<senha>@<host>:<porta>/<nome-do-banco>
+JWT_SECRET=sua-chave-secreta
 Inicie o servidor:
 
 bash
-Copy
+Copiar
 npm start
-# ou
-yarn start
-O servidor estará disponível em http://localhost:3000.
+O servidor estará rodando na porta 3000.
 
-Endpoints
+Rotas da API
 GET /
-Descrição: Rota pública de boas-vindas.
+Retorna uma mensagem de boas-vindas.
 
+Resposta:
+json
+Copiar
+{
+  "message": "Bem vindo a nossa API de autenticação!"
+}
+GET /user/:id
+Retorna as informações de um usuário, exceto a senha, dado o seu ID.
+
+Parâmetros:
+
+id: ID do usuário.
 Resposta:
 
 json
-Copy
-{ "message": "Bem vindo a nossa API de autenticação!" }
-POST /auth/register
-Descrição: Registra um novo usuário.
-
-Corpo da Requisição:
-
-json
-Copy
-{
-  "name": "João Silva",
-  "email": "joao@email.com",
-  "password": "123456",
-  "confirmPassword": "123456"
-}
-Respostas:
-
-201 Created: Usuário criado com sucesso.
-
-422 Unprocessable Entity: Campos inválidos ou usuário já existe.
-
-POST /auth/login
-Descrição: Autentica um usuário e retorna um token JWT.
-
-Corpo da Requisição:
-
-json
-Copy
-{
-  "email": "joao@email.com",
-  "password": "123456"
-}
-Resposta de Sucesso:
-
-json
-Copy
-{
-  "message": "Usuário logado com sucesso!",
-  "token": "seu_token_jwt"
-}
-Respostas de Erro:
-
-422 Unprocessable Entity: Credenciais inválidas.
-
-GET /user/:id
-Descrição: Retorna informações do usuário (requer autenticação).
-
-Headers:
-
-bash
-Copy
-Authorization: Bearer <token>
-Resposta de Sucesso:
-
-json
-Copy
+Copiar
 {
   "message": "Usuário encontrado!",
   "user": {
-    "_id": "123",
-    "name": "João Silva",
-    "email": "joao@email.com"
+    "_id": "ID_DO_USUARIO",
+    "name": "Nome do Usuário",
+    "email": "email@exemplo.com"
   }
 }
-Respostas de Erro:
+POST /auth/register
+Registra um novo usuário.
 
-401 Unauthorized: Token ausente ou inválido.
+Corpo da requisição:
 
-404 Not Found: Usuário não encontrado.
+json
+Copiar
+{
+  "name": "Nome do Usuário",
+  "email": "email@exemplo.com",
+  "password": "senha123",
+  "confirmPassword": "senha123"
+}
+Resposta:
 
-Exemplo de Uso
-Registro:
+Sucesso:
+json
+Copiar
+{
+  "message": "Usuário criado com sucesso!"
+}
+Erro de validação:
+json
+Copiar
+{
+  "message": "Todos os campos são obrigatórios!"
+}
+POST /auth/login
+Realiza o login do usuário e retorna um token JWT.
 
-bash
-Copy
-curl -X POST http://localhost:3000/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Maria", "email": "maria@email.com", "password": "senha123", "confirmPassword": "senha123"}'
-Login:
+Corpo da requisição:
 
-bash
-Copy
-curl -X POST http://localhost:3000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "maria@email.com", "password": "senha123"}'
-Acesso à Rota Privada (substitua <token> e <user_id>):
+json
+Copiar
+{
+  "email": "email@exemplo.com",
+  "password": "senha123"
+}
+Resposta:
 
-bash
-Copy
-curl http://localhost:3000/user/<user_id> \
-  -H "Authorization: Bearer <token>"
+Sucesso:
+json
+Copiar
+{
+  "message": "Usuário logado com sucesso!",
+  "token": "JWT_TOKEN"
+}
+Erro de credenciais:
+json
+Copiar
+{
+  "message": "Senha inválida!"
+}
+Ambiente de Desenvolvimento
+Este projeto foi desenvolvido com a seguinte configuração:
+
+Node.js: v16.x.x
+MongoDB: Local ou Atlas
+Dependências: Express, Mongoose, dotenv, bcrypt, jwt
+Contribuindo
+Se você deseja contribuir com este projeto, fique à vontade para abrir uma issue ou enviar um pull request.
+
+Faça um fork deste repositório.
+Crie uma branch para sua feature (git checkout -b feature/nova-feature).
+Faça as alterações necessárias e commit (git commit -am 'Adicionando nova feature').
+Envie para o repositório remoto (git push origin feature/nova-feature).
+Abra um pull request.
 Licença
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo LICENSE para mais detalhes.
 
-Nota: Garanta que o MongoDB esteja em execução localmente ou configure uma URL remota no .env.
+Autor
+Seu Nome
 
+php-template
+Copiar
+
+### Como criar o arquivo `.env`
+
+Na raiz do projeto, crie um arquivo `.env` com as variáveis de ambiente:
+
+```bash
+MONGO_URL=mongodb://<usuario>:<senha>@<host>:<porta>/<nome-do-banco>
+JWT_SECRET=sua-chave-secreta
+Observações:
+A API está configurada para rodar na porta 3000 por padrão.
+O MongoDB pode ser local ou utilizar o MongoDB Atlas.
+O segredo do JWT (JWT_SECRET) deve ser uma chave segura.
