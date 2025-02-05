@@ -28,8 +28,8 @@ cd authentication-api
 
 Instale as dependências:
 
+- **Copy**
 ```bash
-Copy
 npm install
 ```
 
@@ -37,7 +37,7 @@ Configure as variáveis de ambiente:
 
 Crie um arquivo .env na raiz do projeto e adicione as seguintes variáveis:
 
-env
+- **env**
 ```Copy
 MONGO_URL=sua_url_de_conexao_mongodb
 JWT_SECRET=sua_chave_secreta_jwt
@@ -45,20 +45,22 @@ JWT_SECRET=sua_chave_secreta_jwt
 
 Inicie o servidor:
 
+- **Copy**
 ```bash
-Copy
 npm start
 ```
 
 O servidor estará rodando na porta 3000. Você pode acessar a API em http://localhost:3000.
 
 Rotas da API
-```Rota Pública
+```json
+Rota Pública
 GET / - Retorna uma mensagem de boas-vindas.
 ```
 
+
+- **Copy**
 ```json
-Copy
 {
   "message": "Bem vindo a nossa API de autenticação!"
 }
