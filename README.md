@@ -67,12 +67,13 @@ GET / - Retorna uma mensagem de boas-vindas.
 }
 ```
 Rotas de Autenticação
+```bash
 POST /auth/register - Registra um novo usuário.
+```
 
 Corpo da Requisição:
 
 ```json
-Copy
 {
   "name": "Nome do Usuário",
   "email": "usuario@example.com",
@@ -83,18 +84,16 @@ Copy
 Resposta de Sucesso:
 
 ```json
-Copy
 {
   "message": "Usuário criado com sucesso!"
 }
 ```
-
+```bash
 POST /auth/login - Realiza o login do usuário.
-
+```
 Corpo da Requisição:
 
 ```json
-Copy
 {
   "email": "usuario@example.com",
   "password": "senha123"
@@ -103,19 +102,18 @@ Copy
 Resposta de Sucesso:
 
 ```json
-Copy
 {
   "message": "Usuário logado com sucesso!",
   "token": "token_jwt_gerado"
 }
 ```
 Rota Privada
+```bash
 GET /user/:id - Retorna informações do usuário (requer autenticação via token JWT).
-
+```
 Resposta de Sucesso:
 
 ```json
-Copy
 {
   "message": "Usuário encontrado!",
   "user": {
@@ -128,5 +126,3 @@ Copy
 Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
 
-Licença
-Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
