@@ -21,39 +21,48 @@ Uma API de autenticação simples desenvolvida com Node.js, Express e MongoDB. P
 ## 🔧 Instalação
 
 1. Clone o repositório:
-bash
+```bash
 git clone https://github.com/seu-usuario/authentication-api.git
 cd authentication-api
+```
 
 Instale as dependências:
 
-bash
+```bash
 Copy
 npm install
+```
+
 Configure as variáveis de ambiente:
 
 Crie um arquivo .env na raiz do projeto e adicione as seguintes variáveis:
 
 env
-Copy
+```Copy
 MONGO_URL=sua_url_de_conexao_mongodb
 JWT_SECRET=sua_chave_secreta_jwt
+```
+
 Inicie o servidor:
 
-bash
+```bash
 Copy
 npm start
+```
+
 O servidor estará rodando na porta 3000. Você pode acessar a API em http://localhost:3000.
 
 Rotas da API
-Rota Pública
+```Rota Pública
 GET / - Retorna uma mensagem de boas-vindas.
+```
 
-json
+```json
 Copy
 {
   "message": "Bem vindo a nossa API de autenticação!"
 }
+```
 Rotas de Autenticação
 POST /auth/register - Registra um novo usuário.
 
