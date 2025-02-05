@@ -30,139 +30,85 @@ Instale as dependências:
 bash
 Copy
 npm install
-Crie um arquivo .env na raíz do projeto com as variáveis:
+Configure as variáveis de ambiente:
+
+Crie um arquivo .env na raiz do projeto e adicione as seguintes variáveis:
 
 env
 Copy
 MONGO_URL=sua_url_de_conexao_mongodb
-JWT_SECRET=seu_secret_jwt
-PORT=3000
+JWT_SECRET=sua_chave_secreta_jwt
 Inicie o servidor:
 
 bash
 Copy
 npm start
-📝 Estrutura do Projeto
-Copy
-src/
-├── models/
-│   └── User.js    # Modelo do usuário
-├── server.js      # Configuração principal
-.env               # Variáveis de ambiente
-Modelo do Usuário (models/User.js):
-javascript
-Copy
-import mongoose from "mongoose";
+O servidor estará rodando na porta 3000. Você pode acessar a API em http://localhost:3000.
 
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
-
-const User = mongoose.model("User", UserSchema);
-
-export default User;
-🚀 Rotas da API
-GET /
-Descrição: Rota pública inicial
-
-Resposta:
-
-json
-Copy
-{ "message": "Bem vindo a nossa API de autenticação!" }
-POST /auth/register
-Descrição: Registrar novo usuário
-
-Campos obrigatórios: name, email, password, confirmPassword
-
-Exemplo de requisição:
+Rotas da API
+Rota Pública
+GET / - Retorna uma mensagem de boas-vindas.
 
 json
 Copy
 {
-  "name": "João Silva",
-  "email": "joao@email.com",
+  "message": "Bem vindo a nossa API de autenticação!"
+}
+Rotas de Autenticação
+POST /auth/register - Registra um novo usuário.
+
+Corpo da Requisição:
+
+json
+Copy
+{
+  "name": "Nome do Usuário",
+  "email": "usuario@example.com",
   "password": "senha123",
   "confirmPassword": "senha123"
 }
-Resposta de sucesso:
-
-json
-Copy
-{ "message": "Usuário criado com sucesso!" }
-POST /auth/login
-Descrição: Login de usuário
-
-Campos obrigatórios: email, password
-
-Exemplo de requisição:
+Resposta de Sucesso:
 
 json
 Copy
 {
-  "email": "joao@email.com",
+  "message": "Usuário criado com sucesso!"
+}
+POST /auth/login - Realiza o login do usuário.
+
+Corpo da Requisição:
+
+###json
+Copy
+{
+  "email": "usuario@example.com",
   "password": "senha123"
 }
-Resposta de sucesso:
+Resposta de Sucesso:
 
-json
+###json
 Copy
 {
   "message": "Usuário logado com sucesso!",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "token": "token_jwt_gerado"
 }
-GET /user/:id
-Descrição: Obter dados do usuário (rota protegida)
+Rota Privada
+GET /user/:id - Retorna informações do usuário (requer autenticação via token JWT).
 
-Headers: Authorization: Bearer <token>
+Resposta de Sucesso:
 
-Resposta de sucesso:
-
-json
+###json
 Copy
 {
   "message": "Usuário encontrado!",
   "user": {
-    "_id": "65a1b2c3d4e5f6g7h8i9j0k",
-    "name": "João Silva",
-    "email": "joao@email.com"
+    "_id": "id_do_usuario",
+    "name": "Nome do Usuário",
+    "email": "usuario@example.com"
   }
 }
-🔒 Considerações de Segurança
-Senhas armazenadas com hash bcrypt
+Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
 
-Autenticação via JWT com tempo de expiração configurável
-
-Proteção de rotas sensíveis
-
-Validação de campos no servidor
-
-Dados sensíveis armazenados em variáveis de ambiente
-
-⚙️ Tecnologias Utilizadas
-Node.js
-
-Express
-
-MongoDB/Mongoose
-
-bcryptjs
-
-JSON Web Tokens (JWT)
-
-dotenv
-
-📄 Licença
-Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para detalhes.
+Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
