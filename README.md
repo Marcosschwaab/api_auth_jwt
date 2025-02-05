@@ -28,7 +28,6 @@ cd authentication-api
 
 Instale as dependências:
 
-- **Copy**
 ```bash
 npm install
 ```
@@ -38,14 +37,14 @@ Configure as variáveis de ambiente:
 Crie um arquivo .env na raiz do projeto e adicione as seguintes variáveis:
 
 - **env**
-```Copy
+```bash
 MONGO_URL=sua_url_de_conexao_mongodb
 JWT_SECRET=sua_chave_secreta_jwt
 ```
 
 Inicie o servidor:
 
-- **Copy**
+
 ```bash
 npm start
 ```
