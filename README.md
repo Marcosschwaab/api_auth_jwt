@@ -53,8 +53,9 @@ npm start
 O servidor estará rodando na porta 3000. Você pode acessar a API em http://localhost:3000.
 
 Rotas da API
-```json
-Rota Pública
+
+-**Rota Pública**
+```bash
 GET / - Retorna uma mensagem de boas-vindas.
 ```
 
@@ -70,7 +71,7 @@ POST /auth/register - Registra um novo usuário.
 
 Corpo da Requisição:
 
-json
+```json
 Copy
 {
   "name": "Nome do Usuário",
@@ -78,37 +79,42 @@ Copy
   "password": "senha123",
   "confirmPassword": "senha123"
 }
+```
 Resposta de Sucesso:
 
-json
+```json
 Copy
 {
   "message": "Usuário criado com sucesso!"
 }
+```
+
 POST /auth/login - Realiza o login do usuário.
 
 Corpo da Requisição:
 
-###json
+```json
 Copy
 {
   "email": "usuario@example.com",
   "password": "senha123"
 }
+```
 Resposta de Sucesso:
 
-###json
+```json
 Copy
 {
   "message": "Usuário logado com sucesso!",
   "token": "token_jwt_gerado"
 }
+```
 Rota Privada
 GET /user/:id - Retorna informações do usuário (requer autenticação via token JWT).
 
 Resposta de Sucesso:
 
-###json
+```json
 Copy
 {
   "message": "Usuário encontrado!",
@@ -118,6 +124,7 @@ Copy
     "email": "usuario@example.com"
   }
 }
+```
 Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
 
