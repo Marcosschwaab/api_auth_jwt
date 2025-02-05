@@ -31,7 +31,7 @@ Este projeto é uma API de autenticação simples utilizando Node.js, Express, M
    cd nome-do-repositorio
 Instale as dependências:
 
-bash
+```bash
 Copiar
 npm install
 Crie um arquivo .env na raiz do projeto com as seguintes variáveis de ambiente:
@@ -42,7 +42,7 @@ MONGO_URL=mongodb://<usuario>:<senha>@<host>:<porta>/<nome-do-banco>
 JWT_SECRET=sua-chave-secreta
 Inicie o servidor:
 
-bash
+```bash
 Copiar
 npm start
 O servidor estará rodando na porta 3000.
