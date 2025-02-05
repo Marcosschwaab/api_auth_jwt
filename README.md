@@ -57,9 +57,6 @@ Rotas da API
 ```bash
 GET / - Retorna uma mensagem de boas-vindas.
 ```
-
-
-- **Copy**
 ```json
 {
   "message": "Bem vindo a nossa API de autenticação!"
